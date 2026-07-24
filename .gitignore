@@ -1,0 +1,7 @@
+# Ignorar binarios y estado de Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Ignorar archivos de credenciales
+SSH.txt
