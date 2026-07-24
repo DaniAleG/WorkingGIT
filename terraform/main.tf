@@ -17,13 +17,13 @@ provider "eveng" {
 # ==========================================
 # 1. LABORATORIO Y GESTIÓN
 # ==========================================
-resource "eveng_lab" "lab_mpls_pinto" {
-  name        = "Topologia_MPLS_Pinto"
-  description = "Laboratorio MPLS - VRF Pinto"
+resource "eveng_lab" "lab_mpls_GIT" {
+  name        = "Topologia_MPLS_GIT"
+  description = "Laboratorio MPLS - VRF GIT"
 }
 
 resource "eveng_network" "cloud_gestion" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Management_Cloud"
   type     = "pnet0"
   left     = 450
@@ -34,7 +34,7 @@ resource "eveng_network" "cloud_gestion" {
 # 2. NODOS (ROUTERS CISCO IOL)
 # ==========================================
 resource "eveng_node" "pe_1" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "PE_1"
   template = "iol"
   type     = "iol"
@@ -43,7 +43,7 @@ resource "eveng_node" "pe_1" {
 }
 
 resource "eveng_node" "p_2" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "P_2"
   template = "iol"
   type     = "iol"
@@ -52,7 +52,7 @@ resource "eveng_node" "p_2" {
 }
 
 resource "eveng_node" "rr_1" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "RR_1"
   template = "iol"
   type     = "iol"
@@ -61,7 +61,7 @@ resource "eveng_node" "rr_1" {
 }
 
 resource "eveng_node" "p_1" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "P_1"
   template = "iol"
   type     = "iol"
@@ -70,7 +70,7 @@ resource "eveng_node" "p_1" {
 }
 
 resource "eveng_node" "pe_2" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "PE_2"
   template = "iol"
   type     = "iol"
@@ -82,35 +82,35 @@ resource "eveng_node" "pe_2" {
 # 3. CONEXIONES DE GESTIÓN (Puerto e0/3 para Ansible)
 # ==========================================
 resource "eveng_node_link" "mgmt_pe_1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.cloud_gestion.id
   source_node_id = eveng_node.pe_1.id
   source_port    = "e0/3"
 }
 
 resource "eveng_node_link" "mgmt_p_2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.cloud_gestion.id
   source_node_id = eveng_node.p_2.id
   source_port    = "e0/3"
 }
 
 resource "eveng_node_link" "mgmt_rr_1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.cloud_gestion.id
   source_node_id = eveng_node.rr_1.id
   source_port    = "e0/3"
 }
 
 resource "eveng_node_link" "mgmt_p_1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.cloud_gestion.id
   source_node_id = eveng_node.p_1.id
   source_port    = "e0/3"
 }
 
 resource "eveng_node_link" "mgmt_pe_2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.cloud_gestion.id
   source_node_id = eveng_node.pe_2.id
   source_port    = "e0/3"
@@ -120,37 +120,37 @@ resource "eveng_node_link" "mgmt_pe_2" {
 # 4. REDES LÓGICAS (BRIDGES PARA ENLACES P2P)
 # ==========================================
 resource "eveng_network" "net_pe1_p2" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Net_PE1_P2"
   type     = "bridge"
 }
 
 resource "eveng_network" "net_pe1_p1" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Net_PE1_P1"
   type     = "bridge"
 }
 
 resource "eveng_network" "net_p2_rr1" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Net_P2_RR1"
   type     = "bridge"
 }
 
 resource "eveng_network" "net_rr1_p1" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Net_RR1_P1"
   type     = "bridge"
 }
 
 resource "eveng_network" "net_p2_pe2" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Net_P2_PE2"
   type     = "bridge"
 }
 
 resource "eveng_network" "net_p1_pe2" {
-  lab_path = eveng_lab.lab_mpls_pinto.path
+  lab_path = eveng_lab.lab_mpls_GIT.path
   name     = "Net_P1_PE2"
   type     = "bridge"
 }
@@ -161,13 +161,13 @@ resource "eveng_network" "net_p1_pe2" {
 
 # Enlace: PE_1 (e0/1) <---> P_2 (e0/0)
 resource "eveng_node_link" "link_pe1_p2_pe1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_pe1_p2.id
   source_node_id = eveng_node.pe_1.id
   source_port    = "e0/1"
 }
 resource "eveng_node_link" "link_pe1_p2_p2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_pe1_p2.id
   source_node_id = eveng_node.p_2.id
   source_port    = "e0/0"
@@ -175,13 +175,13 @@ resource "eveng_node_link" "link_pe1_p2_p2" {
 
 # Enlace: PE_1 (e0/2) <---> P_1 (e0/0)
 resource "eveng_node_link" "link_pe1_p1_pe1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_pe1_p1.id
   source_node_id = eveng_node.pe_1.id
   source_port    = "e0/2"
 }
 resource "eveng_node_link" "link_pe1_p1_p1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_pe1_p1.id
   source_node_id = eveng_node.p_1.id
   source_port    = "e0/0"
@@ -189,13 +189,13 @@ resource "eveng_node_link" "link_pe1_p1_p1" {
 
 # Enlace: P_2 (e0/1) <---> RR_1 (e0/0)
 resource "eveng_node_link" "link_p2_rr1_p2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_p2_rr1.id
   source_node_id = eveng_node.p_2.id
   source_port    = "e0/1"
 }
 resource "eveng_node_link" "link_p2_rr1_rr1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_p2_rr1.id
   source_node_id = eveng_node.rr_1.id
   source_port    = "e0/0"
@@ -203,13 +203,13 @@ resource "eveng_node_link" "link_p2_rr1_rr1" {
 
 # Enlace: RR_1 (e0/1) <---> P_1 (e0/1)
 resource "eveng_node_link" "link_rr1_p1_rr1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_rr1_p1.id
   source_node_id = eveng_node.rr_1.id
   source_port    = "e0/1"
 }
 resource "eveng_node_link" "link_rr1_p1_p1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_rr1_p1.id
   source_node_id = eveng_node.p_1.id
   source_port    = "e0/1"
@@ -217,13 +217,13 @@ resource "eveng_node_link" "link_rr1_p1_p1" {
 
 # Enlace: P_2 (e0/2) <---> PE_2 (e0/1)
 resource "eveng_node_link" "link_p2_pe2_p2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_p2_pe2.id
   source_node_id = eveng_node.p_2.id
   source_port    = "e0/2"
 }
 resource "eveng_node_link" "link_p2_pe2_pe2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_p2_pe2.id
   source_node_id = eveng_node.pe_2.id
   source_port    = "e0/1"
@@ -231,13 +231,13 @@ resource "eveng_node_link" "link_p2_pe2_pe2" {
 
 # Enlace: P_1 (e0/2) <---> PE_2 (e0/0)
 resource "eveng_node_link" "link_p1_pe2_p1" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_p1_pe2.id
   source_node_id = eveng_node.p_1.id
   source_port    = "e0/2"
 }
 resource "eveng_node_link" "link_p1_pe2_pe2" {
-  lab_path       = eveng_lab.lab_mpls_pinto.path
+  lab_path       = eveng_lab.lab_mpls_GIT.path
   network_id     = eveng_network.net_p1_pe2.id
   source_node_id = eveng_node.pe_2.id
   source_port    = "e0/0"
